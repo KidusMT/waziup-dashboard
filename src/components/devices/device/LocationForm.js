@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
+import GpsLocation from "./GpsLocation";
 
 class LocationForm extends Component {
 
@@ -39,6 +40,14 @@ class LocationForm extends Component {
       <Button color="primary" key='cancel' onTouchTap={()=>{this.props.handleClose();}}>Cancel</Button>,
       <Button color="primary" key='submit' onTouchTap={()=>{this.props.onSubmit(this.state.location); this.props.handleClose();}}>Submit</Button>,
     ];
+
+    const innerRef = useRef();
+
+    const getLocation = () => {
+        innerRef.current && innerRef.current.getLocation();
+        // console.log("geolocated --> ", innerRef.current.getLocation());
+    };
+
     return (
       <Dialog actions={actions} modal open={this.props.modalOpen} autoScrollBodyContent={true}>
       <DialogTitle>Location</DialogTitle>
@@ -53,16 +62,19 @@ class LocationForm extends Component {
          </Map>
          <div className="locationCoords">
             <Grid container spacing={24}>
-              <Grid item xs={6}>
+              <GpsLocation onError={error => console.log(error)} ref={innerRef} />
+              {console.log("GPS coords ", this.props.coords)}
+              <Grid item xs={4}>
                 <Typography variant="subtitle1" style={{margin: 10}}>
                   Device Location:
                 </Typography> 
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={8}>
+              
               <Button variant="contained"
                         color="primary"
                         className="addDeviceButton"
-                        onTouchTap={() => this.setState({ modalAddDevice: true })} >
+                        onTouchTap={getLocation} >
                   Get location from Smart Phone GPS
                 </Button>
               </Grid>
