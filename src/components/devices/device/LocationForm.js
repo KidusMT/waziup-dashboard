@@ -52,9 +52,21 @@ class LocationForm extends Component {
           </Marker>
          </Map>
          <div className="locationCoords">
-          <Typography variant="subtitle1" style={{margin: 10}}>
-            Device Location:
-            </Typography> 
+            <Grid container spacing={24}>
+              <Grid item xs={6}>
+                <Typography variant="subtitle1" style={{margin: 10}}>
+                  Device Location:
+                </Typography> 
+              </Grid>
+              <Grid item xs={6}>
+              <Button variant="contained"
+                        color="primary"
+                        className="addDeviceButton"
+                        onTouchTap={() => this.setState({ modalAddDevice: true })} >
+                  Get location from Smart Phone GPS
+                </Button>
+              </Grid>
+            </Grid>
            <Grid container spacing={24}>
             <Grid item xs={6}>
               <TextField name="longitude" label="Longitude" value={this.state.location.longitude} onChange={this.handleChange}/>
