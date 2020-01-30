@@ -41,7 +41,7 @@ class LocationForm extends Component {
       <Button color="primary" key='submit' onTouchTap={()=>{this.props.onSubmit(this.state.location); this.props.handleClose();}}>Submit</Button>,
     ];
 
-    const innerRef = useRef();
+    // const innerRef = useRef();
 
     const getLocation = () => {
         innerRef.current && innerRef.current.getLocation();
@@ -62,7 +62,7 @@ class LocationForm extends Component {
          </Map>
          <div className="locationCoords">
             <Grid container spacing={24}>
-              <GpsLocation onError={error => console.log(error)} ref={innerRef} />
+              {/* <GpsLocation onError={error => console.log(error)} ref={innerRef} /> */}
               {console.log("GPS coords ", this.props.coords)}
               <Grid item xs={4}>
                 <Typography variant="subtitle1" style={{margin: 10}}>
